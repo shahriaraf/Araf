@@ -106,19 +106,16 @@ const Projects = () => {
   const [activeTab, setActiveTab] = useState("web");
   const [currDeg, setCurrDeg] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [isPaused, setIsPaused] = useState(false); // New State for Pause
+  const [isPaused, setIsPaused] = useState(false);
 
-  // --- SWIPE LOGIC STATE ---
- const [touchStart, setTouchStart] = useState<number | null>(null);
-const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  const projects: Project[] =
-  activeTab === "web" ? webProjects : appProjects;
+  const projects: Project[] = activeTab === "web" ? webProjects : appProjects;
 
   const count = projects.length;
   const theta = 360 / count;
 
-  // --- RESPONSIVE CARD SIZE ---
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -129,37 +126,36 @@ const [touchEnd, setTouchEnd] = useState<number | null>(null);
   }, []);
 
   const cardWidth = isMobile ? 260 : 500; 
-  const cardHeight = isMobile ? 500 : 600;
+  // Reduced card height slightly on mobile to ensure it fits nicely
+  const cardHeight = isMobile ? 420 : 600; 
   
   const radius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count)) + (isMobile ? 30 : 80); 
 
   const rotateNext = () => setCurrDeg(prev => prev - theta);
   const rotatePrev = () => setCurrDeg(prev => prev + theta);
 
-  // --- AUTO ROTATION LOGIC ---
   useEffect(() => {
-    if (isPaused) return; // Stop if user is hovering
+    if (isPaused) return;
 
     const interval = setInterval(() => {
       rotateNext();
-    }, 4000); // Rotates every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
-  }, [isPaused, theta]); // Re-run if paused state or theta changes
+  }, [isPaused, theta]);
 
-  // --- TOUCH HANDLERS ---
-const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-  setIsPaused(true);
-  setTouchEnd(null);
-  setTouchStart(e.targetTouches[0].clientX);
-};
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setIsPaused(true);
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
-const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-  setTouchEnd(e.targetTouches[0].clientX);
-};
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
 
   const handleTouchEnd = () => {
-    setIsPaused(false); // Resume after touch
+    setIsPaused(false);
     if (touchStart === null || touchEnd === null) return;
 
     const distance = touchStart - touchEnd;
@@ -177,11 +173,10 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
   return (
     <section className="bg-black min-h-screen py-20 overflow-hidden w-full relative">
       
-      {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#491717] to-transparent opacity-50"></div>
 
       {/* --- HEADER --- */}
-      <div className="relative z-10 px-5 md:px-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6">
+      <div className="relative z-10 px-5 md:px-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end mb-10 md:mb-16 gap-6">
         <div>
            <div className="flex items-center gap-2 mb-2">
             <span className="h-[1px] w-8 bg-[#491717]"></span>
@@ -192,7 +187,6 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
           </h2>
         </div>
 
-        {/* Tab Switcher */}
         <div className="bg-[#0a0a0a] p-1 rounded-full border border-[#491717]/30 flex shadow-[0_0_20px_rgba(73,23,23,0.2)]">
             <button
               onClick={() => { setActiveTab("web"); setCurrDeg(0); }}
@@ -218,11 +212,11 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
       </div>
 
       {/* --- THE 3D STAGE --- */}
+      {/* INCREASED HEIGHT FOR MOBILE TO 650px to make room for buttons */}
       <div 
-        className="relative w-full h-[550px] md:h-[800px] flex justify-center items-center"
+        className="relative w-full h-[650px] md:h-[800px] flex justify-center items-center"
         style={{ perspective: "1200px" }}
         
-        // 1. Pause Interaction Handlers
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}
@@ -267,9 +261,10 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
                             </div>
 
                             {/* Info Section */}
-                            <div className="h-[35%] p-6 md:p-8 flex flex-col justify-between bg-gradient-to-b from-[#050505] to-[#1a0505]">
+                            {/* ADJUSTED BG COLOR to ensure visibility */}
+                            <div className="h-[35%] p-4 md:p-8 flex flex-col justify-between bg-[#0a0a0a]">
                                 <div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 truncate group-hover:text-[#ff5555] transition-colors">{project.name}</h3>
+                                    <h3 className="text-xl md:text-3xl font-bold text-white mb-2 truncate group-hover:text-[#ff5555] transition-colors">{project.name}</h3>
                                     <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed">{project.description}</p>
                                 </div>
                                 
@@ -277,23 +272,23 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
                                     <div className="flex gap-5">
                                         <a href={project.githubLink} target="_blank" className="text-gray-500 hover:text-white transition-colors" title="Code"><FaGithub size={24} /></a>
                                        {"liveLink" in project ? (
-  <a
-    href={project.liveLink}
-    target="_blank"
-    className="text-[#ff5555] hover:text-white transition-colors"
-    title="Live Site"
-  >
-    <FaExternalLinkAlt size={22} />
-  </a>
-) : (
-  <a
-    href={project.apkLink}
-    className="text-[#ff5555] hover:text-white transition-colors"
-    title="Download"
-  >
-    <FaAndroid size={24} />
-  </a>
-)}
+                                          <a
+                                            href={project.liveLink}
+                                            target="_blank"
+                                            className="text-[#ff5555] hover:text-white transition-colors"
+                                            title="Live Site"
+                                          >
+                                            <FaExternalLinkAlt size={22} />
+                                          </a>
+                                        ) : (
+                                          <a
+                                            href={project.apkLink}
+                                            className="text-[#ff5555] hover:text-white transition-colors"
+                                            title="Download"
+                                          >
+                                            <FaAndroid size={24} />
+                                          </a>
+                                        )}
 
                                     </div>
                                     <div className="flex gap-2">
@@ -331,23 +326,24 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
         </div>
 
         {/* --- CONTROLS --- */}
-        <div className="absolute bottom-5 flex gap-16 z-20">
+        {/* MOVED CONTROLS LOWER and ensured high Z-Index */}
+        <div className="absolute bottom-4 md:bottom-5 flex gap-16 z-30">
             <button 
                 onClick={rotatePrev} 
-                className="w-16 h-16 rounded-full bg-black border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/80 backdrop-blur-md border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
             >
-                <FaArrowLeft className="text-2xl" />
+                <FaArrowLeft className="text-xl md:text-2xl" />
             </button>
             <button 
                 onClick={rotateNext} 
-                className="w-16 h-16 rounded-full bg-black border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/80 backdrop-blur-md border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
             >
-                <FaArrowRight className="text-2xl" />
+                <FaArrowRight className="text-xl md:text-2xl" />
             </button>
         </div>
 
-        {/* Vignette Floor */}
-        <div className="absolute bottom-0 w-full h-[250px] bg-gradient-to-t from-black via-black/80 to-transparent z-0 pointer-events-none"></div>
+        {/* REDUCED VIGNETTE HEIGHT FOR MOBILE */}
+        <div className="absolute bottom-0 w-full h-[100px] md:h-[250px] bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
 
       </div>
     </section>
