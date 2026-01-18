@@ -331,7 +331,7 @@ const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
         </div>
 
         {/* --- CONTROLS --- */}
-        <div className="absolute bottom-5 flex gap-16 z-20">
+        <div className="absolute -bottom-15 lg:bottom-5 flex gap-16 z-20">
             <button 
                 onClick={rotatePrev} 
                 className="w-16 h-16 rounded-full bg-black border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
