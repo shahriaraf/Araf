@@ -59,7 +59,7 @@ export default function Banner() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full min-h-screen bg-black text-white overflow-hidden flex items-center justify-center"
+      className="relative max-w-7xl mx-auto min-h-screen bg-black text-white overflow-hidden flex items-center justify-center"
     >
       
       {/* --- DYNAMIC SPOTLIGHT EFFECT --- */}
@@ -142,15 +142,15 @@ export default function Banner() {
                     }
                 `}</style>
                 
-                <h1 className="text-6xl md:text-8xl lg:text-9xl text-center lg:text-left font-black tracking-wide leading-[0.85] text-white">
+                <h1 className="text-6xl font-semibold md:text-8xl lg:text-[7.5rem] text-center lg:text-left tracking-wide leading-[0.85] text-white">
                   {/* Shahriar - Standard White/Cyan Glitch */}
-                  <div className="glitch-text relative inline-block mb-2" data-text="Shahriar">
+                  <div className="glitch-text font-cyber relative inline-block mb-2" data-text="Shahriar">
                       Shahriar
                   </div> 
                   <br />
                   {/* Araf - Red Gradient Base + Red Glitch */}
                   <div 
-                    className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#491717] via-red-600 to-[#491717]" 
+                    className="relative font-space inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#491717] via-red-600 to-[#491717]" 
                     data-text="Araf"
                   >
                     Araf
@@ -180,7 +180,7 @@ export default function Banner() {
                 
                 {/* PRIMARY SHIMMER BUTTON */}
                 <button className="group relative text-xs lg:text-[16px] px-4 lg:px-8 py-2 lg:py-4 bg-[#491717] text-white font-bold text-sm tracking-widest uppercase rounded-sm transition-all hover:bg-[#632020] hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(73,23,23,0.3)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] overflow-hidden">
-                    <span className="relative z-10 flex items-center gap-3">
+                    <span className="relative z-10 flex items-center gap-3 font-cyber">
                         View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
@@ -214,7 +214,7 @@ export default function Banner() {
                     priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent z-10"></div>
             </div>
         </div>
 

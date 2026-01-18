@@ -177,7 +177,7 @@ export default function Skills() {
                                     className="w-16 h-16 md:w-24 md:h-24 rounded-xl flex items-center justify-center relative overflow-hidden transition-transform duration-300 group-hover:-translate-y-2"
                                     style={{ 
                                         border: `1px solid ${skill.color}`,
-                                        background: `linear-gradient(135deg, rgba(143, 143, 143, 0.2) 0%, ${skill.color}90 100%)`, 
+                                        background: `linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, ${skill.color}90 100%)`, 
                                         boxShadow: `0 0 20px -5px ${skill.color}60` 
                                     }}
                                 >

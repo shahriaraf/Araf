@@ -1,119 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Manrope:wght@200..800&family=Oxanium:wght@200..800&family=Rubik+Glitch&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap');
 @import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-/* src/styles/hologram.module.css */
-
-/* This container holds all the light pieces */
-.projectorContainer {
-  position: absolute;
-  /* Adjust these top/left/width values to fit YOUR specific image's face */
-  top: 18%; 
-  right: 22%;
-  width: 250px;
-  height: 350px;
-  pointer-events: none;
-  opacity: 0.9;
-  /* Rotate and Skew helps match the angle of the face in the photo */
-  transform: rotate(12deg) skewY(5deg);
-  z-index: 20;
+/* 2. Create standard CSS classes manually */
+.font-glitch {
+  font-family: "Rubik Glitch", system-ui;
 }
 
-/* 
-  SHAPE 1: The Main Lines (Eye/Forehead/Cheek) 
-  We use a gradient to make 1 thick line and 2 thin lines 
-*/
-.faceLines {
-  position: absolute;
-  top: 0;
-  left: 40px;
-  width: 60px; /* Width of the stripe area */
-  height: 100%;
-  
-  /* This gradient creates: Transparent -> Cyan -> Transparent -> Cyan */
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #00f2ff 10%,   /* Start Thick Line */
-    #00f2ff 50%,   /* End Thick Line */
-    transparent 55%,
-    #00f2ff 65%,   /* Thin Line 1 */
-    #00f2ff 70%,
-    transparent 75%,
-    #00f2ff 85%,   /* Thin Line 2 */
-    #00f2ff 90%,
-    transparent 100%
-  );
-
-  /* BLEND MODE is the secret sauce. It makes it look like light on skin. */
-  mix-blend-mode: color-dodge; 
-  
-  /* Soften edges so it looks like projected light, not a sticker */
-  filter: blur(2px) contrast(1.2);
-  
-  /* The Moving Animation */
-  animation: hologramFlicker 4s infinite alternate;
+/* 2. THE CYBER (For secondary headings) */
+.font-cyber {
+  font-family: "Oxanium", sans-serif;
 }
 
-/* SHAPE 2: The Nose Triangle */
-.nosePatch {
-  position: absolute;
-  top: 45%;
-  left: -20px; /* Push it left towards the nose */
-  width: 50px;
-  height: 60px;
-  background: #00f2ff;
-  
-  /* Clip Path makes it a triangle/trapezoid shape */
-  clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
-  
-  mix-blend-mode: color-dodge;
-  filter: blur(5px);
-  opacity: 0.7;
-  animation: hologramPulse 3s infinite;
+/* 3. THE TECH HEADING (Modern, clean tech look) */
+.font-space {
+  font-family: "Space Grotesk", sans-serif;
 }
 
-/* SHAPE 3: The Ear Glow (Optional, based on your ref) */
-.earPatch {
-  position: absolute;
-  top: 40%;
-  right: -20px;
-  width: 15px;
-  height: 80px;
-  background: #00f2ff;
-  border-radius: 50%; /* Curved shape */
-  mix-blend-mode: color-dodge;
-  filter: blur(6px);
-  opacity: 0.5;
+/* 4. THE ARTISTIC (For "Jaw Dropping" big text) */
+.font-art {
+  font-family: "Syne", sans-serif;
 }
 
-/* ANIMATIONS */
-
-/* Makes the light shift slightly up/down and flicker opacity */
-@keyframes hologramFlicker {
-  0% {
-    opacity: 0.8;
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    opacity: 1;
-  }
-  55% {
-    opacity: 0.7; /* Quick flicker */
-  }
-  57% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.8;
-    transform: translateY(10px) scale(1.02); /* Slight movement down */
-  }
+/* 5. THE CODE (For scramble text & terminal effects) */
+.font-code {
+  font-family: "JetBrains Mono", monospace;
 }
 
-@keyframes hologramPulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.9; }
+/* 6. THE BODY (Clean reading text) */
+.font-body {
+  font-family: "Manrope", sans-serif;
 }
