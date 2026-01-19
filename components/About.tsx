@@ -28,7 +28,7 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative group mb-20"
+          className="relative group mb-20 hidden lg:block"
         >
             {/* 1. Back decorative border (Offset) */}
             <div className="absolute inset-0 rounded-2xl z-0 transition-transform duration-500 "></div>
@@ -61,8 +61,8 @@ export default function About() {
                 transition={{ duration: 0.5 }}
                 className="flex items-center gap-3 mb-6"
             >
-                <span className="h-[2px] w-10 bg-[#491717]"></span>
-                <span className="font-mono text-[#ff5555] tracking-widest uppercase text-sm">Who I am</span>
+                <span className="h-[2px] w-10 bg-[#b45555]"></span>
+                <span className="font-mono text-[#b45555] tracking-widest uppercase text-sm">Who I am</span>
             </motion.div>
 
             {/* 2. Main Title */}
@@ -72,7 +72,7 @@ export default function About() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="font-space text-4xl md:text-6xl font-bold text-white mb-8 leading-tight"
             >
-                Building <span className="text-[#491717]">digital products</span>, brands, and experiences.
+                Building <span className="text-[#b45555]">digital products</span>, brands, and experiences.
             </motion.h2>
 
             {/* 3. Bio Paragraph */}
@@ -80,7 +80,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="font-body text-gray-400 text-lg leading-relaxed mb-10 space-y-4"
+                className="font-body text-white/60 text-lg leading-relaxed mb-10 space-y-4"
             >
                 <p>
                     I am a <strong className="text-white">Full Stack Developer</strong> based in Bangladesh, with a passion for building digital services/stuff I want. I have a knack for all things launching products, from planning and designing all the way to solving real-life problems with code.
@@ -98,10 +98,10 @@ export default function About() {
                 className="grid grid-cols-3 gap-4 mb-10"
             >
                 {stats.map((stat, i) => (
-                    <div key={i} className="bg-[#111] border border-[#222] p-4 rounded-xl flex flex-col items-center text-center group hover:border-[#491717] transition-colors">
-                        <stat.icon className="text-[#491717] text-2xl mb-2 group-hover:text-[#ff5555] transition-colors" />
-                        <h4 className="font-space text-2xl md:text-3xl font-bold text-white">{stat.value}</h4>
-                        <span className="font-mono text-[10px] text-gray-500 uppercase tracking-wider">{stat.label}</span>
+                    <div key={i} className="bg-[#111] border border-[#222] p-4 rounded-xl flex flex-col items-center text-center group hover:border-[#b45555] transition-colors">
+                        <stat.icon className="text-[#b45555] text-2xl mb-2 group-hover:text-[#b45555] transition-colors" />
+                        <h4 className="font-space text-2xl md:text-3xl font-bold text-white/80">{stat.value}</h4>
+                        <span className="font-mono text-[10px] text-white/60 uppercase tracking-wider">{stat.label}</span>
                     </div>
                 ))}
             </motion.div>
@@ -112,7 +112,7 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
             >
-                <button className="group relative px-8 py-4 bg-[#491717] text-white font-space font-bold uppercase tracking-widest rounded-lg overflow-hidden shadow-[0_0_20px_rgba(73,23,23,0.4)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] transition-all">
+                <button className="group relative px-8 py-4 bg-[#491717] text-white/80 font-space font-bold uppercase tracking-widest rounded-lg overflow-hidden shadow-[0_0_20px_rgba(73,23,23,0.4)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] transition-all">
                     <span className="relative z-10 flex items-center gap-3">
                         Download CV <FaDownload className="group-hover:translate-y-1 transition-transform" />
                     </span>

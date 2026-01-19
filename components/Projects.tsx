@@ -127,7 +127,7 @@ const Projects = () => {
 
   const cardWidth = isMobile ? 260 : 500; 
   // Reduced card height slightly on mobile to ensure it fits nicely
-  const cardHeight = isMobile ? 420 : 600; 
+  const cardHeight = isMobile ? 420 : 550; 
   
   const radius = Math.round((cardWidth / 2) / Math.tan(Math.PI / count)) + (isMobile ? 30 : 80); 
 
@@ -179,15 +179,15 @@ const Projects = () => {
       <div className="relative z-10 px-5 md:px-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end mb-10 md:mb-16 gap-6">
         <div>
            <div className="flex items-center gap-2 mb-2">
-            <span className="h-[1px] w-8 bg-[#491717]"></span>
-            <span className="text-[#491717] font-mono text-xs tracking-[0.3em] uppercase">My Portfolio</span>
+            <span className="h-[1px] w-8 bg-[#b45555]"></span>
+            <span className="text-[#b45555] font-mono text-xs tracking-[0.3em] uppercase">My Projects</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-white">
             SELECTED <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#491717] via-[#ff5555] to-white">WORKS</span>
           </h2>
         </div>
 
-        <div className="bg-[#0a0a0a] p-1 rounded-full border border-[#491717]/30 flex shadow-[0_0_20px_rgba(73,23,23,0.2)]">
+        <div className="bg-[#0a0a0a] p-1 rounded-full border border-[#b45555]/40 flex shadow-[0_0_20px_rgba(73,23,23,0.2)]">
             <button
               onClick={() => { setActiveTab("web"); setCurrDeg(0); }}
               className={`px-6 py-2 rounded-full text-sm font-bold tracking-wider transition-all duration-300 
@@ -248,15 +248,15 @@ const Projects = () => {
                         }}
                     >
                         {/* --- MAIN CARD --- */}
-                        <div className="w-full h-full bg-[#050505] border border-[#491717]/50 rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,0,0,1)] group hover:border-[#ff5555] transition-all duration-500">
+                        <div className="w-full h-full bg-[#050505] border border-[#b45555]/10 rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,0,0,1)] group hover:border-[#b45555] transition-all duration-500">
                             
                             {/* Image Section */}
                             <div className="h-[65%] w-full overflow-hidden relative">
                                 <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90"></div>
                                 
-                                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-2 rounded-lg border border-[#491717]/40 shadow-xl">
-                                    <FaCode className="text-[#ff5555] text-sm" />
+                                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3 py-2 rounded-lg border border-[#b45555]/40 shadow-xl">
+                                    <FaCode className="text-[#b45555] text-sm" />
                                 </div>
                             </div>
 
@@ -264,18 +264,18 @@ const Projects = () => {
                             {/* ADJUSTED BG COLOR to ensure visibility */}
                             <div className="h-[35%] p-4 md:p-8 flex flex-col justify-between bg-[#0a0a0a]">
                                 <div>
-                                    <h3 className="text-xl md:text-3xl font-bold text-white mb-2 truncate group-hover:text-[#ff5555] transition-colors">{project.name}</h3>
-                                    <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed">{project.description}</p>
+                                    <h3 className="text-xl md:text-3xl font-bold text-white mb-2 truncate group-hover:text-[#b45555] transition-colors">{project.name}</h3>
+                                    <p className="text-sm text-white/80 line-clamp-2 leading-relaxed">{project.description}</p>
                                 </div>
                                 
-                                <div className="flex justify-between items-center mt-4 pt-4 border-t border-[#491717]/30">
+                                <div className="flex justify-between items-center mt-4 pt-4 border-t border-[#b45555]/30">
                                     <div className="flex gap-5">
-                                        <a href={project.githubLink} target="_blank" className="text-gray-500 hover:text-white transition-colors" title="Code"><FaGithub size={24} /></a>
+                                        <a href={project.githubLink} target="_blank" className="text-white/80 hover:text-white transition-colors" title="Code"><FaGithub size={24} /></a>
                                        {"liveLink" in project ? (
                                           <a
                                             href={project.liveLink}
                                             target="_blank"
-                                            className="text-[#ff5555] hover:text-white transition-colors"
+                                            className="text-[#b45555] hover:text-white transition-colors"
                                             title="Live Site"
                                           >
                                             <FaExternalLinkAlt size={22} />
@@ -283,7 +283,7 @@ const Projects = () => {
                                         ) : (
                                           <a
                                             href={project.apkLink}
-                                            className="text-[#ff5555] hover:text-white transition-colors"
+                                            className="text-[#b45555] hover:text-white transition-colors"
                                             title="Download"
                                           >
                                             <FaAndroid size={24} />
@@ -293,7 +293,7 @@ const Projects = () => {
                                     </div>
                                     <div className="flex gap-2">
                                          {project.technologies.slice(0, 2).map((tech, i) => (
-                                            <span key={i} className="text-[10px] md:text-xs uppercase font-bold text-[#ff5555] bg-[#491717]/20 px-3 py-1 rounded border border-[#491717]/30">
+                                            <span key={i} className="text-[10px] md:text-xs uppercase font-bold text-[#b45555] bg-[#491717]/20 px-3 py-1 rounded border border-[#491717]/30">
                                                 {tech}
                                             </span>
                                          ))}
@@ -330,13 +330,13 @@ const Projects = () => {
         <div className="absolute bottom-4 md:bottom-5 flex gap-16 z-30">
             <button 
                 onClick={rotatePrev} 
-                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/80 backdrop-blur-md border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/80 backdrop-blur-md border border-[#491717] text-[#b45555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
             >
                 <FaArrowLeft className="text-xl md:text-2xl" />
             </button>
             <button 
                 onClick={rotateNext} 
-                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/80 backdrop-blur-md border border-[#491717] text-[#ff5555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/80 backdrop-blur-md border border-[#491717] text-[#b45555] flex items-center justify-center hover:bg-[#491717] hover:text-white transition-all shadow-[0_0_20px_rgba(73,23,23,0.4)] active:scale-95"
             >
                 <FaArrowRight className="text-xl md:text-2xl" />
             </button>

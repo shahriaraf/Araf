@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowRight, Github, Linkedin, Twitter, Download, Terminal } from "lucide-react";
 
-// --- SCRAMBLE TEXT LOGIC ---
+// --- SCRAMBLE TEXT LOGIC (UNCHANGED) ---
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
 const ScrambleText = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState(text);
@@ -27,7 +27,7 @@ const ScrambleText = ({ text }: { text: string }) => {
     scramble();
     return () => clearInterval(interval);
   }, [text]);
-  return <span className="font-mono text-[#ff5555]">{displayText}</span>;
+  return <span className="font-mono text-[#b45555]">{displayText}</span>;
 };
 
 export default function Banner() {
@@ -70,85 +70,139 @@ export default function Banner() {
         }}
       />
 
+      {/* --- CUSTOM CSS FOR SIGNAL LOSS EFFECT --- */}
+      <style jsx>{`
+        /* Glitch Text (Original) */
+        .glitch-text { position: relative; }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black;
+        }
+        .glitch-text::before {
+            left: -2px; text-shadow: 2px 0 #00c2ff; clip-path: inset(0 900px 0 0); animation: noise-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: 2px; text-shadow: -2px 0 #ff00c1; clip-path: inset(0 900px 0 0); animation: noise-anim 2s infinite linear alternate-reverse;
+        }
+
+        /* --- NETWORK SIGNAL LOSS ANIMATIONS --- */
+        
+        /* The container for the hologram */
+        .hologram-wrapper {
+            position: relative;
+            /* The main animation loop: 5s long, repeats forever */
+            animation: signal-flicker 5s infinite linear;
+            filter: contrast(1.3) brightness(1.2);
+        }
+
+        /* Scanlines overlay */
+        .scanlines {
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(0, 0, 0, 0.4) 4px
+            );
+            background-size: 100% 4px;
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        /* The Ghost Layers (RGB Split) */
+        .glitch-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('/WhatsApp Image 2026-01-18 at 1.52.38 PM.jpeg') no-repeat center top;
+            background-size: cover;
+            opacity: 0; /* Hidden by default, triggers on glitch */
+            mix-blend-mode: screen;
+        }
+
+        /* Specific animations for ghost layers */
+        .glitch-layer.cyan {
+            filter: drop-shadow(-4px 0px cyan);
+            animation: rgb-shift-cyan 5s infinite linear;
+        }
+        .glitch-layer.red {
+            filter: drop-shadow(4px 0px red);
+            animation: rgb-shift-red 5s infinite linear;
+        }
+
+        /* KEYFRAMES: The "Story" of the animation */
+        
+        /* 1. Main Opacity Flicker (Connection dropping) */
+        @keyframes signal-flicker {
+            0%   { opacity: 1; transform: scale(1) skew(0deg); filter: blur(0px); }
+            80%  { opacity: 0.95; transform: scale(1) skew(0deg); filter: blur(0.5px); }
+            
+            /* Glitch Spike 1 */
+            81%  { opacity: 0.2; transform: scale(1.02) skew(10deg); filter: blur(2px); }
+            82%  { opacity: 0.8; transform: scale(0.98) skew(-5deg); filter: blur(0px); }
+            
+            /* Total Signal Loss */
+            85%  { opacity: 0; transform: scale(1.1) skew(20deg); }
+            88%  { opacity: 0; }
+            
+            /* Signal Returning */
+            89%  { opacity: 0.4; transform: scale(1) skew(0deg); filter: sepia(1); }
+            91%  { opacity: 1; }
+            
+            /* Glitch Spike 2 */
+            95%  { opacity: 0.5; transform: translateX(-10px); }
+            96%  { opacity: 1; transform: translateX(0); }
+            100% { opacity: 1; }
+        }
+
+        /* 2. RGB Shift Cyan (Happens only during glitches) */
+        @keyframes rgb-shift-cyan {
+            0%, 80% { opacity: 0; transform: translateX(0); }
+            81%     { opacity: 0.6; transform: translateX(-10px); clip-path: inset(10% 0 60% 0); }
+            85%     { opacity: 0; }
+            95%     { opacity: 0.6; transform: translateX(5px); clip-path: inset(80% 0 5% 0); }
+            96%     { opacity: 0; }
+        }
+
+        /* 3. RGB Shift Red (Happens only during glitches) */
+        @keyframes rgb-shift-red {
+            0%, 80% { opacity: 0; transform: translateX(0); }
+            81%     { opacity: 0.6; transform: translateX(10px); clip-path: inset(40% 0 10% 0); }
+            85%     { opacity: 0; }
+            95%     { opacity: 0.6; transform: translateX(-5px); clip-path: inset(5% 0 80% 0); }
+            96%     { opacity: 0; }
+        }
+        
+        /* Original text animations kept */
+        @keyframes noise-anim {
+            0% { clip-path: inset(20% 0 80% 0); }
+            20% { clip-path: inset(60% 0 1% 0); }
+            40% { clip-path: inset(40% 0 50% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            80% { clip-path: inset(10% 0 70% 0); }
+            100% { clip-path: inset(30% 0 20% 0); }
+        }
+        @keyframes noise-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); }
+            20% { clip-path: inset(30% 0 10% 0); }
+            40% { clip-path: inset(70% 0 20% 0); }
+            60% { clip-path: inset(20% 0 50% 0); }
+            80% { clip-path: inset(50% 0 30% 0); }
+            100% { clip-path: inset(5% 0 80% 0); }
+        }
+      `}</style>
+
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
         
-        {/* --- LEFT: JAW DROPPING TEXT CONTENT --- */}
+        {/* --- LEFT: CONTENT (UNCHANGED) --- */}
         <div className="lg:col-span-7 flex flex-col justify-center space-y-10 order-2 lg:order-1 pt-12 lg:pt-0 relative z-20">
             
-            {/* 1. Animated Tech Badge */}
-            <div className="group w-fit">
-                <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 group-hover:border-[#491717]/50 group-hover:bg-[#491717]/10">
-                    <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#491717] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                    </span>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase group-hover:text-red-400 transition-colors">Available for work</span>
-                </div>
-            </div>
-
-            {/* 2. CONSTANT GLITCH TITLE */}
+            {/* Title */}
             <div className="relative">
-                <style jsx>{`
-                    /* Glitch Effect - Constant Loop */
-                    .glitch-text {
-                        position: relative;
-                    }
-                    .glitch-text::before,
-                    .glitch-text::after {
-                        content: attr(data-text);
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: black; /* Matches bg to hide main text momentarily */
-                    }
-                    .glitch-text::before {
-                        left: -2px;
-                        text-shadow: 2px 0 #00c2ff; /* Cyan offset */
-                        clip-path: inset(0 900px 0 0);
-                        animation: noise-anim-2 3s infinite linear alternate-reverse;
-                    }
-                    .glitch-text::after {
-                        left: 2px;
-                        text-shadow: -2px 0 #ff00c1; /* Magenta offset */
-                        clip-path: inset(0 900px 0 0);
-                        animation: noise-anim 2s infinite linear alternate-reverse;
-                    }
-
-                    /* Specific color override for ARAF glitch layers */
-                    .glitch-red::before {
-                        text-shadow: 2px 0 #ff0000;
-                    }
-                    .glitch-red::after {
-                         text-shadow: -2px 0 #491717;
-                    }
-
-                    @keyframes noise-anim {
-                        0% { clip-path: inset(20% 0 80% 0); }
-                        20% { clip-path: inset(60% 0 1% 0); }
-                        40% { clip-path: inset(40% 0 50% 0); }
-                        60% { clip-path: inset(80% 0 5% 0); }
-                        80% { clip-path: inset(10% 0 70% 0); }
-                        100% { clip-path: inset(30% 0 20% 0); }
-                    }
-                    @keyframes noise-anim-2 {
-                        0% { clip-path: inset(10% 0 60% 0); }
-                        20% { clip-path: inset(30% 0 10% 0); }
-                        40% { clip-path: inset(70% 0 20% 0); }
-                        60% { clip-path: inset(20% 0 50% 0); }
-                        80% { clip-path: inset(50% 0 30% 0); }
-                        100% { clip-path: inset(5% 0 80% 0); }
-                    }
-                `}</style>
-                
                 <h1 className="text-6xl font-semibold md:text-8xl lg:text-[7.5rem] text-center lg:text-left tracking-wide leading-[0.85] text-white">
-                  {/* Shahriar - Standard White/Cyan Glitch */}
                   <div className="glitch-text font-cyber relative inline-block mb-2" data-text="Shahriar">
                       Shahriar
                   </div> 
                   <br />
-                  {/* Araf - Red Gradient Base + Red Glitch */}
                   <div 
                     className="relative font-space inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#491717] via-red-600 to-[#491717]" 
                     data-text="Araf"
@@ -158,63 +212,78 @@ export default function Banner() {
                 </h1>
             </div>
 
-            {/* 3. Glassmorphic Terminal Container */}
+            {/* Terminal */}
             <div className="relative group w-full md:max-w-[28rem]">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#491717] to-red-900 rounded-lg blur opacity-30 group-hover:opacity-75 transition duration-1000"></div>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#b45555] to-red-900 rounded-lg blur opacity-30 group-hover:opacity-75 transition duration-1000"></div>
                 <div className="relative flex items-center bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg px-6 py-4">
-                    <Terminal size={25} className="text-[#491717] mr-4" />
-                    <div className="text-lg md:text-3xl font-mono">
+                    <Terminal size={25} className="text-[#b45555] mr-4" />
+                    <div className="text-lg md:text-3xl font-medium font-art">
                         <ScrambleText text={roles[roleIndex]} />
-                        <span className="animate-pulse inline-block w-2 h-5 bg-[#ff5555] ml-2 align-middle"></span>
+                        <span className="animate-pulse inline-block w-2 h-5 bg-[#b45555] ml-2 align-middle"></span>
                     </div>
                 </div>
             </div>
 
             {/* Description */}
-            <p className="text-gray-400 text-lg text-center lg:text-left max-w-lg leading-relaxed border-l-2 border-white/10 pl-6 hover:border-[#491717] transition-colors duration-300">
+            <p className="text-white/80 text-lg max-w-lg leading-relaxed border-l-2 border-white/10 pl-6 hover:border-[#b45555] transition-colors duration-300">
               I build scalable, pixel-perfect digital experiences. Turning complex problems into elegant code.
             </p>
 
             {/* Buttons */}
             <div className="flex grow justify-center lg:justify-start lg:flex-raw gap-3 lg:gap-6 pt-2">
-                
-                {/* PRIMARY SHIMMER BUTTON */}
-                <button className="group relative text-xs lg:text-[16px] px-4 lg:px-8 py-2 lg:py-4 bg-[#491717] text-white font-bold text-sm tracking-widest uppercase rounded-sm transition-all hover:bg-[#632020] hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(73,23,23,0.3)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] overflow-hidden">
+                <button className="group relative text-xs lg:text-[16px] px-4 lg:px-8 py-2 lg:py-4 bg-[#491717] text-white/80 font-bold text-sm tracking-widest uppercase rounded-sm transition-all hover:bg-[#632020] hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(73,23,23,0.3)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] overflow-hidden">
                     <span className="relative z-10 flex items-center gap-3 font-cyber">
                         View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform"/>
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
                 </button>
-
-                {/* SECONDARY GLOW BUTTON */}
-                <button className="group px-4 lg:px-8 py-2 lg:py-4 border border-white/10 text-white font-bold text-sm tracking-widest uppercase rounded-sm hover:border-[#491717] hover:text-[#ff8888] hover:bg-[#491717]/10 transition-all flex items-center gap-3 text-xs lg:text-[16px]">
+                <button className="group px-4 lg:px-8 py-2 lg:py-4 border border-white/40 text-white/80 font-bold text-sm tracking-widest uppercase rounded-sm hover:border-[#491717] hover:text-[#b45555] hover:bg-[#491717]/10 transition-all flex items-center gap-3 text-xs lg:text-[16px]">
                     Resume <Download size={18} className="group-hover:animate-bounce" />
                 </button>
             </div>
             
-            {/* 4. Socials with Magnetic Bloom */}
+            {/* Socials */}
             <div className="flex justify-center lg:justify-start gap-6 pt-2">
                 {[Github, Linkedin, Twitter].map((Icon, i) => (
                     <a key={i} href="#" className="group relative p-2">
-                        <div className="absolute inset-0 bg-[#491717] rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <Icon className="relative text-gray-400 group-hover:text-white transition-colors duration-300 z-10" size={24} />
+                        <div className="absolute inset-0 bg-[#491717] rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
+                        <Icon className="relative text-gray-400 group-hover:text-[#b45555] transition-colors duration-300 z-10" size={24} />
                     </a>
                 ))}
             </div>
         </div>
 
-        {/* --- RIGHT: BLENDED IMAGE (Preserved) --- */}
-        <div className="lg:col-span-5 relative order-1 lg:order-2 h-[80vh] lg:h-[80vh] w-full flex items-end justify-center lg:justify-end overflow-visible">
-            <div className="relative w-full h-full lg:w-[120%] lg:-mr-24">
-                <Image 
-                    src="/WhatsApp Image 2026-01-18 at 1.52.38 PM.jpeg"
-                    alt="Profile"
-                    fill
-                    className="object-cover object-top lg:object-center rounded-full"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent z-10"></div>
+        {/* --- RIGHT: BAD SIGNAL HOLOGRAM IMAGE --- */}
+        <div className="lg:col-span-5 relative order-1 lg:order-2 h-[80vh] lg:h-[80vh] w-full flex items-end justify-center lg:justify-end overflow-visible pointer-events-none">
+            
+            {/* This wrapper handles the "Flickering / Disappearing" Logic */}
+            <div className="relative w-full h-full lg:w-[120%] lg:-mr-24 hologram-wrapper">
+                
+                {/* Ghost Layer Cyan (Visible only during glitches) */}
+                <div className="glitch-layer cyan rounded-full"></div>
+                
+                {/* Ghost Layer Red (Visible only during glitches) */}
+                <div className="glitch-layer red rounded-full"></div>
+
+                {/* Main Base Image */}
+                <div className="relative w-full h-full rounded-full overflow-hidden">
+                    <Image 
+                        src="/WhatsApp Image 2026-01-18 at 1.52.38 PM.jpeg"
+                        alt="Profile"
+                        fill
+                        className="object-cover object-top lg:object-center opacity-80"
+                        priority
+                    />
+                    
+          
+                    
+                    {/* Noise Texture (Static) */}
+                    <div className="absolute inset-0 bg-white opacity-[0.05] z-20 mix-blend-overlay pointer-events-none"></div>
+                </div>
+
+                {/* Bottom Gradient (To fade into black bg) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent z-30"></div>
             </div>
         </div>
 

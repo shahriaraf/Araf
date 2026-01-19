@@ -107,7 +107,7 @@ export default function Skills() {
         {[...Array(8)].map((_, i) => (
             <div 
                 key={i}
-                className="absolute h-[200%] w-16 md:w-32 bg-[#aa3939] top-[-50%]"
+                className="absolute h-[200%] w-16 md:w-32 bg-[#b45555] top-[-50%]"
                 style={{
                     left: `${i * 15 - 10}%`, 
                     transform: 'rotate(25deg)', 
@@ -124,7 +124,7 @@ export default function Skills() {
         
         {/* === LEFT SIDE: VERTICAL TEXT INDICATOR === */}
         {/* Width reduced on mobile to save space */}
-        <div className="w-12 md:w-24 bg-[#aa3939] flex items-center justify-center relative shadow-2xl z-20 shrink-0">
+        <div className="w-12 md:w-24 bg-[#b45555] flex items-center justify-center relative shadow-2xl z-20 shrink-0">
             <div className="rotate-180 [writing-mode:vertical-rl] text-black font-black text-2xl md:text-5xl uppercase tracking-widest whitespace-nowrap drop-shadow-md">
                 <AnimatePresence mode="wait">
                     <motion.span
@@ -146,8 +146,8 @@ export default function Skills() {
             
             {/* Header Text - Adjusted positioning for mobile */}
             <div className="relative md:absolute top-0 left-0 md:top-8 md:left-16 z-10 mb-6 md:mb-0">
-                <h3 className="text-[#aa3939] font-bold text-sm md:text-lg mb-1 tracking-widest uppercase border-b-2 border-[#aa3939] inline-block pb-1">My Arsenal</h3>
-                <p className="text-gray-400 text-xs md:text-base max-w-md mt-1 md:mt-2 h-8 md:h-auto">
+                <h3 className="text-[#b45555] font-bold text-sm md:text-lg mb-1 tracking-widest uppercase border-b-2 border-[#b45555] inline-block pb-1">My Arsenal</h3>
+                <p className="text-white/80 text-xs md:text-base max-w-md mt-1 md:mt-2 h-8 md:h-auto">
                    {skillCategories[activeTab].description}
                 </p>
             </div>
@@ -216,7 +216,7 @@ export default function Skills() {
                     <div 
                         className={`w-1 rounded-full transition-all duration-500 ease-in-out
                             ${activeTab === index 
-                                ? "h-8 md:h-16 bg-[#812b2b] shadow-[0_0_15px_#832c2c] opacity-100" 
+                                ? "h-8 md:h-16 bg-[#b45555] shadow-[0_0_15px_#832c2c] opacity-100" 
                                 : "h-1.5 md:h-2 bg-gray-700 hover:bg-gray-500 opacity-50"}
                         `}
                     />
