@@ -7,6 +7,20 @@
   --foreground: #171717;
 }
 
+/* Hide standard cursor everywhere */
+html, body, a, button {
+  cursor: none;
+}
+
+/* Optional: Bring it back for mobile devices where touch is used */
+@media (hover: none) {
+  html, body, a, button {
+    cursor: auto;
+  }
+  /* You might want to conditionally render the <Cursor /> component 
+     in React so it doesn't show on mobile, but hiding the native one is key */
+}
+
 /* 2. Create standard CSS classes manually */
 .font-glitch {
   font-family: "Rubik Glitch", system-ui;
@@ -39,4 +53,30 @@
 
 .font-bebas {
   font-family: "Bebas Neue", sans-serif;
+}
+
+
+/* 2. YOUR CUSTOM CURSOR CSS */
+.cursor {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  /* Centering logic */
+  transform: translate(-50%, -50%);
+  /* Smooth size & color change */
+  transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s;
+  mix-blend-mode: difference;
+}
+
+/* HOVER STATE */
+.cursor.grow {
+  width: 60px; /* Slightly bigger for drama */
+  height: 60px;
+  background-color: white;
+  opacity: 1;
+  border: none; /* Optional: remove border when filled */
 }

@@ -20,12 +20,12 @@ const socialLinks = [
   },
   {
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/shoumo-shahriar-araf", // Update with your actual Profile URL
+    href: "https://www.linkedin.com/in/shoumo-shahriar-araf",
     label: "LinkedIn",
   },
   {
     icon: Facebook,
-    href: "https://www.facebook.com/shahriar.araf.3", // Update with your actual Profile URL
+    href: "https://www.facebook.com/shahriar.araf.3",
     label: "Facebook",
   },
 ];
@@ -131,7 +131,8 @@ export default function Banner() {
         .hologram-wrapper {
           position: relative;
           animation: signal-flicker 5s infinite linear;
-          filter: contrast(1.3) brightness(1.2);
+          /* UPDATED: Increased Contrast for Sharpness */
+          filter: contrast(1.1) brightness(1.1) drop-shadow(0 0 15px rgba(0,0,0,0.8));
         }
         .glitch-layer {
           position: absolute;
@@ -155,15 +156,16 @@ export default function Banner() {
         }
 
         @keyframes signal-flicker {
+          /* UPDATED: Removed blur from resting states (0%, 80%, 100%) */
           0% {
             opacity: 1;
             transform: scale(1) skew(0deg);
             filter: blur(0px);
           }
           80% {
-            opacity: 0.95;
+            opacity: 1;
             transform: scale(1) skew(0deg);
-            filter: blur(0.5px);
+            filter: blur(0px);
           }
           81% {
             opacity: 0.2;
@@ -342,12 +344,9 @@ export default function Banner() {
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
             </button>
-            {/* ... inside Banner.tsx ... */}
-
-            {/* Replaced <button> with <a> */}
             <a
-              href="/assets/Araf-Full-Stack-Resume.pdf" // Path to your file
-              download="Shahriar_Araf_Resume.pdf" // This forces the browser to download it
+              href="/assets/Araf-Full-Stack-Resume.pdf"
+              download="Shahriar_Araf_Resume.pdf"
               className="group px-4 lg:px-8 py-2 lg:py-4 border border-white/40 text-white/80 font-bold text-sm tracking-widest uppercase rounded-sm hover:border-[#b45555] hover:text-[#b45555] hover:bg-[#491717]/10 transition-all flex items-center gap-3 text-xs lg:text-[16px] cursor-pointer"
             >
               Resume{" "}
@@ -355,7 +354,7 @@ export default function Banner() {
             </a>
           </div>
 
-          {/* SOCIAL LINKS (Updated with real Links and Facebook) */}
+          {/* SOCIAL LINKS */}
           <div className="flex justify-center lg:justify-start gap-6 pt-2">
             {socialLinks.map((social, i) => (
               <a
@@ -366,9 +365,7 @@ export default function Banner() {
                 className="group relative p-2"
                 title={social.label}
               >
-                {/* Glow Effect */}
                 <div className="absolute inset-0 bg-[#491717] rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
-                {/* Icon */}
                 <social.icon
                   className="relative text-gray-400 group-hover:text-[#b45555] transition-colors duration-300 z-10"
                   size={24}
@@ -389,7 +386,9 @@ export default function Banner() {
                 src="/WhatsApp Image 2026-01-18 at 1.52.38 PM.jpeg"
                 alt="Profile"
                 fill
-                className="object-cover object-top lg:object-center opacity-80"
+                // UPDATED: Removed opacity-80, Added quality={100}
+                className="object-cover object-top lg:object-center opacity-100"
+                quality={100}
                 priority
               />
               <div className="absolute inset-0 bg-white opacity-[0.05] z-20 mix-blend-overlay pointer-events-none"></div>

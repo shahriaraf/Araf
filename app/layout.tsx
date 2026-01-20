@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Oxanium, Roboto_Mono, Rubik_Glitch } from "next/font/google";
 import "./globals.css";
+import Cursor from "@/components/Cursor";
+
 
 // 1. Setup Fonts with simple variable names
 const inter = Inter({
@@ -44,6 +46,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${oxanium.variable} ${robotoMono.variable} ${rubikGlitch.variable} font-sans bg-black text-white antialiased`}
       >
+        <Cursor></Cursor>
         {children}
       </body>
     </html>
