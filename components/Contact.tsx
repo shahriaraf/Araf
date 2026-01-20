@@ -43,7 +43,7 @@ export default function Contact() {
       
 
       {/* --- THE BROWSER WINDOW CONTAINER --- */}
-      <div className="relative w-full max-w-[1400px] bg-[#0a0a0a] border border-[#222] rounded-xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-[1400px] rounded-xl shadow-2xl overflow-hidden flex flex-col">
         
         {/* === MAIN CONTENT AREA === */}
         <div className="flex flex-col md:flex-row min-h-[600px]">
@@ -52,7 +52,7 @@ export default function Contact() {
             <div className="flex-1 flex flex-col md:flex-row">
                 
                 {/* LEFT SIDE: BIG TEXT */}
-                <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center border-r border-[#222] relative">
+                <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center relative">
 
                     <h1 className="font-[family-name:var(--font-bebas)] text-7xl md:text-9xl text-white/80 leading-[0.85] tracking-wide mb-8">
                         LET'S <br />
@@ -141,7 +141,7 @@ export default function Contact() {
             </div>
 
             {/* --- RIGHT SIDEBAR: ICONS --- */}
-            <div className="w-full md:w-20 border-l border-[#222] flex md:flex-col justify-between items-center py-8 bg-[#080808]">
+            <div className="w-full md:w-20 border-l flex md:flex-col justify-between items-center py-8 ">
                 
                 {/* Top Icons: WhatsApp & Email */}
                 <div className="flex md:flex-col gap-8 text-white/80">
