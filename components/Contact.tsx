@@ -41,10 +41,6 @@ export default function Contact() {
   return (
     <section className={`min-h-screen max-w-7xl mx-auto flex items-center justify-center p-4 md:p-8 font-sans ${bebas.variable}`}>
       
-      {/* --- BACKGROUND PATTERN --- */}
-      <div className="absolute inset-0 opacity-[0.03]" 
-           style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
-      </div>
 
       {/* --- THE BROWSER WINDOW CONTAINER --- */}
       <div className="relative w-full max-w-[1400px] bg-[#0a0a0a] border border-[#222] rounded-xl shadow-2xl overflow-hidden flex flex-col">
