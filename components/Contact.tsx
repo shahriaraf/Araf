@@ -141,7 +141,7 @@ export default function Contact() {
             </div>
 
             {/* --- RIGHT SIDEBAR: ICONS --- */}
-            <div className="w-full md:w-20 border-l flex md:flex-col justify-between items-center py-8 ">
+            <div className="w-full md:w-20 lg:border-l lg:border-white/20 flex md:flex-col justify-between items-center py-8 ">
                 
                 {/* Top Icons: WhatsApp & Email */}
                 <div className="flex md:flex-col gap-8 text-white/80">
