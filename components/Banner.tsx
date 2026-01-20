@@ -2,9 +2,28 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { ArrowRight, Github, Linkedin, Twitter, Download, Terminal } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Facebook, Download, Terminal } from "lucide-react";
 
-// --- SCRAMBLE TEXT LOGIC (UNCHANGED) ---
+// --- SOCIAL LINKS CONFIGURATION ---
+const socialLinks = [
+  { 
+    icon: Github, 
+    href: "https://github.com/shahriaraf", 
+    label: "GitHub" 
+  },
+  { 
+    icon: Linkedin, 
+    href: "https://www.linkedin.com/in/shoumo-shahriar-araf", // Update with your actual Profile URL
+    label: "LinkedIn" 
+  },
+  { 
+    icon: Facebook, 
+    href: "https://www.facebook.com/shahriar.araf.3", // Update with your actual Profile URL
+    label: "Facebook" 
+  },
+];
+
+// --- SCRAMBLE TEXT LOGIC ---
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
 const ScrambleText = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState(text);
@@ -72,7 +91,7 @@ export default function Banner() {
 
       {/* --- CUSTOM CSS FOR SIGNAL LOSS EFFECT --- */}
       <style jsx>{`
-        /* Glitch Text (Original) */
+        /* Glitch Text */
         .glitch-text { position: relative; }
         .glitch-text::before, .glitch-text::after {
             content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black;
@@ -85,76 +104,35 @@ export default function Banner() {
         }
 
         /* --- NETWORK SIGNAL LOSS ANIMATIONS --- */
-        
-        /* The container for the hologram */
         .hologram-wrapper {
             position: relative;
-            /* The main animation loop: 5s long, repeats forever */
             animation: signal-flicker 5s infinite linear;
             filter: contrast(1.3) brightness(1.2);
         }
-
-        /* Scanlines overlay */
-        .scanlines {
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0px,
-                transparent 3px,
-                rgba(0, 0, 0, 0.4) 4px
-            );
-            background-size: 100% 4px;
-            position: absolute;
-            inset: 0;
-            z-index: 20;
-            pointer-events: none;
-        }
-
-        /* The Ghost Layers (RGB Split) */
         .glitch-layer {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: url('/WhatsApp Image 2026-01-18 at 1.52.38 PM.jpeg') no-repeat center top;
             background-size: cover;
-            opacity: 0; /* Hidden by default, triggers on glitch */
+            opacity: 0; 
             mix-blend-mode: screen;
         }
+        .glitch-layer.cyan { filter: drop-shadow(-4px 0px cyan); animation: rgb-shift-cyan 5s infinite linear; }
+        .glitch-layer.red { filter: drop-shadow(4px 0px red); animation: rgb-shift-red 5s infinite linear; }
 
-        /* Specific animations for ghost layers */
-        .glitch-layer.cyan {
-            filter: drop-shadow(-4px 0px cyan);
-            animation: rgb-shift-cyan 5s infinite linear;
-        }
-        .glitch-layer.red {
-            filter: drop-shadow(4px 0px red);
-            animation: rgb-shift-red 5s infinite linear;
-        }
-
-        /* KEYFRAMES: The "Story" of the animation */
-        
-        /* 1. Main Opacity Flicker (Connection dropping) */
         @keyframes signal-flicker {
             0%   { opacity: 1; transform: scale(1) skew(0deg); filter: blur(0px); }
             80%  { opacity: 0.95; transform: scale(1) skew(0deg); filter: blur(0.5px); }
-            
-            /* Glitch Spike 1 */
             81%  { opacity: 0.2; transform: scale(1.02) skew(10deg); filter: blur(2px); }
             82%  { opacity: 0.8; transform: scale(0.98) skew(-5deg); filter: blur(0px); }
-            
-            /* Total Signal Loss */
             85%  { opacity: 0; transform: scale(1.1) skew(20deg); }
             88%  { opacity: 0; }
-            
-            /* Signal Returning */
             89%  { opacity: 0.4; transform: scale(1) skew(0deg); filter: sepia(1); }
             91%  { opacity: 1; }
-            
-            /* Glitch Spike 2 */
             95%  { opacity: 0.5; transform: translateX(-10px); }
             96%  { opacity: 1; transform: translateX(0); }
             100% { opacity: 1; }
         }
-
-        /* 2. RGB Shift Cyan (Happens only during glitches) */
         @keyframes rgb-shift-cyan {
             0%, 80% { opacity: 0; transform: translateX(0); }
             81%     { opacity: 0.6; transform: translateX(-10px); clip-path: inset(10% 0 60% 0); }
@@ -162,8 +140,6 @@ export default function Banner() {
             95%     { opacity: 0.6; transform: translateX(5px); clip-path: inset(80% 0 5% 0); }
             96%     { opacity: 0; }
         }
-
-        /* 3. RGB Shift Red (Happens only during glitches) */
         @keyframes rgb-shift-red {
             0%, 80% { opacity: 0; transform: translateX(0); }
             81%     { opacity: 0.6; transform: translateX(10px); clip-path: inset(40% 0 10% 0); }
@@ -171,29 +147,17 @@ export default function Banner() {
             95%     { opacity: 0.6; transform: translateX(-5px); clip-path: inset(5% 0 80% 0); }
             96%     { opacity: 0; }
         }
-        
-        /* Original text animations kept */
         @keyframes noise-anim {
-            0% { clip-path: inset(20% 0 80% 0); }
-            20% { clip-path: inset(60% 0 1% 0); }
-            40% { clip-path: inset(40% 0 50% 0); }
-            60% { clip-path: inset(80% 0 5% 0); }
-            80% { clip-path: inset(10% 0 70% 0); }
-            100% { clip-path: inset(30% 0 20% 0); }
+            0% { clip-path: inset(20% 0 80% 0); } 20% { clip-path: inset(60% 0 1% 0); } 40% { clip-path: inset(40% 0 50% 0); } 60% { clip-path: inset(80% 0 5% 0); } 80% { clip-path: inset(10% 0 70% 0); } 100% { clip-path: inset(30% 0 20% 0); }
         }
         @keyframes noise-anim-2 {
-            0% { clip-path: inset(10% 0 60% 0); }
-            20% { clip-path: inset(30% 0 10% 0); }
-            40% { clip-path: inset(70% 0 20% 0); }
-            60% { clip-path: inset(20% 0 50% 0); }
-            80% { clip-path: inset(50% 0 30% 0); }
-            100% { clip-path: inset(5% 0 80% 0); }
+            0% { clip-path: inset(10% 0 60% 0); } 20% { clip-path: inset(30% 0 10% 0); } 40% { clip-path: inset(70% 0 20% 0); } 60% { clip-path: inset(20% 0 50% 0); } 80% { clip-path: inset(50% 0 30% 0); } 100% { clip-path: inset(5% 0 80% 0); }
         }
       `}</style>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
         
-        {/* --- LEFT: CONTENT (UNCHANGED) --- */}
+        {/* --- LEFT: CONTENT --- */}
         <div className="lg:col-span-7 flex flex-col justify-center space-y-10 order-2 lg:order-1 pt-12 lg:pt-0 relative z-20">
             
             {/* Title */}
@@ -242,12 +206,21 @@ export default function Banner() {
                 </button>
             </div>
             
-            {/* Socials */}
+            {/* SOCIAL LINKS (Updated with real Links and Facebook) */}
             <div className="flex justify-center lg:justify-start gap-6 pt-2">
-                {[Github, Linkedin, Twitter].map((Icon, i) => (
-                    <a key={i} href="#" className="group relative p-2">
+                {socialLinks.map((social, i) => (
+                    <a 
+                        key={i} 
+                        href={social.href} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group relative p-2"
+                        title={social.label}
+                    >
+                        {/* Glow Effect */}
                         <div className="absolute inset-0 bg-[#491717] rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
-                        <Icon className="relative text-gray-400 group-hover:text-[#b45555] transition-colors duration-300 z-10" size={24} />
+                        {/* Icon */}
+                        <social.icon className="relative text-gray-400 group-hover:text-[#b45555] transition-colors duration-300 z-10" size={24} />
                     </a>
                 ))}
             </div>
@@ -256,16 +229,10 @@ export default function Banner() {
         {/* --- RIGHT: BAD SIGNAL HOLOGRAM IMAGE --- */}
         <div className="lg:col-span-5 relative order-1 lg:order-2 h-[80vh] lg:h-[80vh] w-full flex items-end justify-center lg:justify-end overflow-visible pointer-events-none">
             
-            {/* This wrapper handles the "Flickering / Disappearing" Logic */}
             <div className="relative w-full h-full lg:w-[120%] lg:-mr-24 hologram-wrapper">
-                
-                {/* Ghost Layer Cyan (Visible only during glitches) */}
                 <div className="glitch-layer cyan rounded-full"></div>
-                
-                {/* Ghost Layer Red (Visible only during glitches) */}
                 <div className="glitch-layer red rounded-full"></div>
 
-                {/* Main Base Image */}
                 <div className="relative w-full h-full rounded-full overflow-hidden">
                     <Image 
                         src="/WhatsApp Image 2026-01-18 at 1.52.38 PM.jpeg"
@@ -274,14 +241,9 @@ export default function Banner() {
                         className="object-cover object-top lg:object-center opacity-80"
                         priority
                     />
-                    
-          
-                    
-                    {/* Noise Texture (Static) */}
                     <div className="absolute inset-0 bg-white opacity-[0.05] z-20 mix-blend-overlay pointer-events-none"></div>
                 </div>
 
-                {/* Bottom Gradient (To fade into black bg) */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-30"></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent z-30"></div>
             </div>
