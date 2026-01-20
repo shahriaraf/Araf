@@ -13,7 +13,7 @@ const bebas = Bebas_Neue({
 
 export default function Contact() {
   return (
-    <section className={`min-h-screen max-w-7xl mx-auto bg-[#050505] flex items-center justify-center p-4 md:p-8 font-sans ${bebas.variable}`}>
+    <section className={`min-h-screen max-w-7xl mx-auto flex items-center justify-center p-4 md:p-8 font-sans ${bebas.variable}`}>
       
       {/* --- BACKGROUND PATTERN (To match the vibe) --- */}
       <div className="absolute inset-0 opacity-[0.03]" 
