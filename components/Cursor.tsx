@@ -30,7 +30,7 @@ export default function Cursor() {
 
   return (
     <div
-      className={`cursor ${isHovering ? "grow" : ""}`}
+      className={`cursor ${isHovering ? "grow hidden md:inline" : "hidden md:inline"}`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
