@@ -27,7 +27,7 @@ type Project = WebProject | AppProject;
 const webProjects: WebProject[] = [
   {
     name: "Aaryan Sourcing",
-    image: "/assets/Minimalist Neutral Multi Device Computer Mockup Website Launch Instagram Post (1580 x 1080 px) (1780 x 1080 px) (1).png",
+    image: "/aaryan.png",
     liveLink: "https://aaryansourcing.com/",
     githubLink: "https://github.com/shahriaraf/Aariyan-Sourching-Client",
     description: "B2B sourcing platform.",
@@ -35,7 +35,7 @@ const webProjects: WebProject[] = [
   },
   {
     name: "Rentechify",
-    image: "/assets/Modern Neutral Digital Product Computer Mockup Promotional Instagram Post (1780 x 1080 px) (1).png",
+    image: "/rentechify.png",
     liveLink: "https://rentechify.web.app/",
     githubLink: "https://github.com/codegeeksteam/RentifyTech",
     description: "Tech rental marketplace.",
@@ -43,7 +43,7 @@ const webProjects: WebProject[] = [
   },
   {
     name: "Leading University",
-    image: "/assets/Minimalist Neutral Multi Device Computer Mockup Website Launch Instagram Post (1780 x 1080 px).png",
+    image: "/leading.png",
     liveLink: "https://leading-university-jet.vercel.app/",
     githubLink: "https://github.com/shahriaraf/Leading-University",
     description: "University portal system.",
@@ -176,7 +176,7 @@ const Projects = () => {
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#491717] to-transparent opacity-50"></div>
 
       {/* --- HEADER --- */}
-      <div className="relative z-10 px-5 md:px-10 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end mb-10 md:mb-16 gap-6">
+      <div className="relative z-10 px-5 md:px-10 max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end mb-10 md:mb-16 gap-6">
         <div>
            <div className="flex items-center gap-2 mb-2">
             <span className="h-[1px] w-8 bg-[#b45555]"></span>
