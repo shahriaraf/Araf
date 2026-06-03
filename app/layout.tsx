@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Oxanium, Roboto_Mono, Rubik_Glitch } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
+import SmoothScroll from "./providers/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const oxanium = Oxanium({ subsets: ["latin"], variable: "--font-oxanium", display: "swap" });
@@ -23,8 +24,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={`${inter.variable} ${oxanium.variable} ${robotoMono.variable} ${rubikGlitch.variable} font-sans bg-black text-white antialiased`}>
-        <Cursor />
-        {children}
+        <SmoothScroll>
+          <Cursor />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
