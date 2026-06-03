@@ -8,8 +8,8 @@
 
 /* === Custom Cursor (desktop/mouse only) === */
 @media (hover: hover) and (pointer: fine) {
-  html, body, a, button {
-    cursor: none;
+  html, body, * {
+    cursor: none !important;
   }
 }
 
@@ -21,28 +21,6 @@
 .font-code    { font-family: "JetBrains Mono", monospace; }
 .font-body    { font-family: "Manrope", sans-serif; }
 .font-bebas   { font-family: "Bebas Neue", sans-serif; }
-
-/* === Custom Cursor Styles === */
-.cursor {
-  width: 28px;
-  height: 28px;
-  border: 1.5px solid rgba(255,255,255,0.8);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
-  mix-blend-mode: difference;
-  will-change: transform;
-}
-.cursor.grow {
-  width: 56px;
-  height: 56px;
-  background-color: white;
-  opacity: 1;
-  border: none;
-}
 
 /* === Smooth Scrolling === */
 html {
