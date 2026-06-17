@@ -71,7 +71,7 @@ export default function Banner() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative max-w-7xl mx-auto min-h-screen bg-black text-white overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-10"
+      className="relative max-w-7xl mx-auto min-h-screen bg-black text-white overflow-hidden flex items-center justify-center px-4 sm:px-6"
     >
       {/* --- DYNAMIC SPOTLIGHT EFFECT --- */}
       <div
@@ -164,58 +164,23 @@ export default function Banner() {
           80%  { clip-path: inset(50% 0 30% 0); }
           100% { clip-path: inset(5% 0 80% 0); }
         }
-
-        /* Responsive image height overrides for mid-range screens */
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .image-col {
-            height: 55vw;
-            max-height: 520px;
-          }
-        }
-        @media (min-width: 1024px) and (max-width: 1279px) {
-          .image-col {
-            height: 72vh;
-          }
-        }
-        @media (min-width: 1280px) and (max-width: 1535px) {
-          .image-col {
-            height: 78vh;
-          }
-        }
-        @media (min-width: 1536px) {
-          .image-col {
-            height: 82vh;
-          }
-        }
-
-        /* Clamp-based fluid heading */
-        .hero-name-first {
-          font-size: clamp(3rem, 10vw, 7.5rem);
-          line-height: 0.85;
-        }
-        .hero-name-last {
-          font-size: clamp(3rem, 10vw, 7.5rem);
-          line-height: 0.85;
-        }
       `}</style>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
 
         {/* --- LEFT: CONTENT --- */}
-        <div className="lg:col-span-7 flex flex-col justify-center space-y-5 sm:space-y-7 md:space-y-8 lg:space-y-9 xl:space-y-10 order-2 lg:order-1 pt-4 sm:pt-8 md:pt-10 lg:pt-0 relative z-20 text-center lg:text-left">
+        {/* FIX 1: Increased top padding so "Shahriar" is pushed down from the top edge */}
+        <div className="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-8 lg:space-y-10 order-2 lg:order-1 pt-20 sm:pt-24 lg:pt-16 relative z-20 text-center lg:text-left">
 
           {/* Title */}
           <div className="relative">
-            <h1 className="tracking-wide text-white">
-              <div
-                className="glitch-text font-cyber relative inline-block mb-1 sm:mb-2 hero-name-first"
-                data-text="Shahriar"
-              >
+            <h1 className="text-5xl font-semibold sm:text-7xl md:text-8xl lg:text-[7rem] tracking-wide leading-[0.85] text-white">
+              <div className="glitch-text font-cyber relative inline-block mb-2" data-text="Shahriar">
                 Shahriar
               </div>
               <br />
               <div
-                className="relative font-space inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#491717] via-red-600 to-[#491717] hero-name-last"
+                className="relative font-space inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#491717] via-red-600 to-[#491717]"
                 data-text="Araf"
               >
                 Araf
@@ -224,49 +189,43 @@ export default function Banner() {
           </div>
 
           {/* Terminal */}
-          <div className="relative group w-full max-w-[260px] sm:max-w-sm md:max-w-md mx-auto lg:mx-0">
+          <div className="relative group w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto lg:mx-0">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-[#b45555] to-red-900 rounded-lg blur opacity-30 group-hover:opacity-75 transition duration-1000"></div>
-            <div className="relative flex items-center bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg px-3 sm:px-5 lg:px-6 py-2.5 sm:py-3 lg:py-4">
-              <Terminal
-                className="text-[#b45555] mr-2.5 sm:mr-3 lg:mr-4 shrink-0"
-                size={18}
-              />
-              <div className="text-sm sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-medium font-art truncate">
+            <div className="relative flex items-center bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg px-4 sm:px-6 py-3 sm:py-4">
+              <Terminal size={20} className="text-[#b45555] mr-3 sm:mr-4 shrink-0" />
+              <div className="text-base sm:text-xl md:text-2xl lg:text-3xl font-medium font-art truncate">
                 <ScrambleText text={roles[roleIndex]} />
-                <span className="animate-pulse inline-block w-1.5 h-3.5 sm:h-4 lg:h-5 bg-[#b45555] ml-1 sm:ml-2 align-middle"></span>
+                <span className="animate-pulse inline-block w-1.5 h-4 sm:h-5 bg-[#b45555] ml-1 sm:ml-2 align-middle"></span>
               </div>
             </div>
           </div>
 
           {/* Description */}
-          <p className="text-white/80 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto lg:mx-0 leading-relaxed border-l-2 border-white/10 pl-3 sm:pl-5 lg:pl-6 hover:border-[#b45555] transition-colors duration-300 text-left">
+          <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed border-l-2 border-white/10 pl-4 sm:pl-6 hover:border-[#b45555] transition-colors duration-300 text-left">
             I build scalable, pixel-perfect digital experiences. Turning complex problems into elegant code.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 pt-1 sm:pt-2">
-            <a
-              href="#projects"
-              className="group relative text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base px-4 sm:px-6 md:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 bg-[#491717] text-white/80 font-bold tracking-widest uppercase rounded-sm transition-all hover:bg-[#632020] hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(73,23,23,0.3)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 lg:gap-3 font-cyber">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 lg:gap-6 pt-2">
+            <a href="#projects" className="group relative text-xs sm:text-sm lg:text-base px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-[#491717] text-white/80 font-bold tracking-widest uppercase rounded-sm transition-all hover:bg-[#632020] hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(73,23,23,0.3)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] overflow-hidden">
+              <span className="relative z-10 flex items-center gap-2 sm:gap-3 font-cyber">
                 View Projects
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
             </a>
             <a
               href="/assets/Araf-Full-Stack-Resume.pdf"
               download="Shahriar_Araf_Resume.pdf"
-              className="group px-4 sm:px-6 md:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 border border-white/40 text-white/80 font-bold text-[10px] sm:text-xs md:text-sm lg:text-sm xl:text-base tracking-widest uppercase rounded-sm hover:border-[#b45555] hover:text-[#b45555] hover:bg-[#491717]/10 transition-all flex items-center gap-1.5 sm:gap-2 lg:gap-3 cursor-pointer"
+              className="group px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-4 border border-white/40 text-white/80 font-bold text-xs sm:text-sm lg:text-base tracking-widest uppercase rounded-sm hover:border-[#b45555] hover:text-[#b45555] hover:bg-[#491717]/10 transition-all flex items-center gap-2 sm:gap-3 cursor-pointer"
             >
               Resume
-              <Download size={14} className="group-hover:animate-bounce" />
+              <Download size={16} className="group-hover:animate-bounce" />
             </a>
           </div>
 
           {/* SOCIAL LINKS */}
-          <div className="flex justify-center lg:justify-start gap-4 sm:gap-5 lg:gap-6 pt-1 sm:pt-2">
+          <div className="flex justify-center lg:justify-start gap-5 sm:gap-6 pt-2">
             {socialLinks.map((social, i) => (
               <a
                 key={i}
@@ -279,7 +238,7 @@ export default function Banner() {
                 <div className="absolute inset-0 bg-[#491717] rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
                 <social.icon
                   className="relative text-gray-400 group-hover:text-[#b45555] transition-colors duration-300 z-10"
-                  size={20}
+                  size={22}
                 />
               </a>
             ))}
@@ -287,23 +246,39 @@ export default function Banner() {
         </div>
 
         {/* --- RIGHT: HOLOGRAM IMAGE --- */}
-        <div className="lg:col-span-5 relative order-1 lg:order-2 h-[44vw] max-h-[340px] sm:h-[52vw] sm:max-h-[420px] md:h-[55vw] md:max-h-none lg:max-h-none image-col w-full flex items-end justify-center lg:justify-end overflow-visible pointer-events-none">
+        {/* FIX 2 & 3: Removed rounded-full (no more circle), changed object position to show full head,
+            replaced hard crop with multi-directional gradient blend into black background */}
+        <div className="lg:col-span-5 relative order-1 lg:order-2 h-[55vh] sm:h-[65vh] lg:h-[90vh] w-full flex items-end justify-center lg:justify-end overflow-visible pointer-events-none">
           <div className="relative w-full h-full lg:w-[120%] lg:-mr-24 hologram-wrapper">
-            <div className="glitch-layer cyan rounded-full"></div>
-            <div className="glitch-layer red rounded-full"></div>
-            <div className="relative w-full h-full rounded-full overflow-hidden">
+            {/* Glitch layers — no rounded-full so no visible circle edge */}
+            <div className="glitch-layer cyan"></div>
+            <div className="glitch-layer red"></div>
+
+            {/* Image container — no rounded-full, no overflow-hidden that clips the head */}
+            <div className="relative w-full h-full">
               <Image
                 src="/assets/araf-headshot.jpeg"
                 alt="Profile"
                 fill
-                className="object-cover object-top lg:object-center opacity-100"
+                className="object-cover object-[center_8%]"
                 quality={100}
                 priority
               />
               <div className="absolute inset-0 bg-white opacity-[0.05] z-20 mix-blend-overlay pointer-events-none"></div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-30"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent z-30"></div>
+
+            {/* FIX 3: Strong multi-directional gradient fade — blends all edges into black for premium look */}
+            <div
+              className="absolute inset-0 z-30 pointer-events-none"
+              style={{
+                background: `
+                  linear-gradient(to top,    black 0%, transparent 45%),
+                  linear-gradient(to bottom, black 0%, transparent 22%),
+                  linear-gradient(to right,  black 0%, transparent 25%),
+                  linear-gradient(to left,   black 0%, transparent 25%)
+                `,
+              }}
+            />
           </div>
         </div>
 
