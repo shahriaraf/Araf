@@ -71,7 +71,7 @@ export default function Banner() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative max-w-7xl mx-auto min-h-screen bg-black text-white overflow-hidden flex items-center justify-center px-4 sm:px-6"
+      className="relative max-w-[1200px] mx-auto min-h-screen bg-black text-white overflow-hidden flex items-center justify-center px-4 sm:px-6"
     >
       {/* --- DYNAMIC SPOTLIGHT EFFECT --- */}
       <div
@@ -164,18 +164,34 @@ export default function Banner() {
           80%  { clip-path: inset(50% 0 30% 0); }
           100% { clip-path: inset(5% 0 80% 0); }
         }
+
+        .social-line::before {
+          content: '';
+          display: block;
+          width: 1px;
+          height: 60px;
+          background: linear-gradient(to bottom, transparent, #b45555);
+          margin: 0 auto 12px auto;
+        }
+        .social-line::after {
+          content: '';
+          display: block;
+          width: 1px;
+          height: 50px;
+          background: linear-gradient(to top, transparent, #b45555);
+          margin: 12px auto 0 auto;
+        }
       `}</style>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
 
         {/* --- LEFT: CONTENT --- */}
-        {/* FIX 1: Increased top padding so "Shahriar" is pushed down from the top edge */}
-        <div className="lg:col-span-7 flex flex-col justify-center space-y-6 sm:space-y-8 lg:space-y-10 order-2 lg:order-1 pt-20 sm:pt-24 lg:pt-16 relative z-20 text-center lg:text-left">
+        <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-6 lg:space-y-5 order-2 lg:order-1 pt-20 sm:pt-24 lg:pt-0 relative z-20 text-center lg:text-left">
 
           {/* Title */}
           <div className="relative">
-            <h1 className="text-5xl font-semibold sm:text-7xl md:text-8xl lg:text-[7rem] tracking-wide leading-[0.85] text-white">
-              <div className="glitch-text font-cyber relative inline-block mb-2" data-text="Shahriar">
+            <h1 className="text-5xl font-semibold sm:text-7xl md:text-8xl lg:text-[6.5rem] tracking-wide leading-[0.85] text-white">
+              <div className="glitch-text font-cyber relative inline-block mb-1" data-text="Shahriar">
                 Shahriar
               </div>
               <br />
@@ -193,7 +209,7 @@ export default function Banner() {
             <div className="absolute -inset-0.5 bg-gradient-to-r from-[#b45555] to-red-900 rounded-lg blur opacity-30 group-hover:opacity-75 transition duration-1000"></div>
             <div className="relative flex items-center bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg px-4 sm:px-6 py-3 sm:py-4">
               <Terminal size={20} className="text-[#b45555] mr-3 sm:mr-4 shrink-0" />
-              <div className="text-base sm:text-xl md:text-2xl lg:text-3xl font-medium font-art truncate">
+              <div className="text-base sm:text-xl md:text-2xl lg:text-2xl font-medium font-art truncate">
                 <ScrambleText text={roles[roleIndex]} />
                 <span className="animate-pulse inline-block w-1.5 h-4 sm:h-5 bg-[#b45555] ml-1 sm:ml-2 align-middle"></span>
               </div>
@@ -201,12 +217,12 @@ export default function Banner() {
           </div>
 
           {/* Description */}
-          <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed border-l-2 border-white/10 pl-4 sm:pl-6 hover:border-[#b45555] transition-colors duration-300 text-left">
+          <p className="text-white/80 text-sm sm:text-base lg:text-base max-w-sm mx-auto lg:mx-0 leading-relaxed border-l-2 border-white/10 pl-4 sm:pl-6 hover:border-[#b45555] transition-colors duration-300 text-left">
             I build scalable, pixel-perfect digital experiences. Turning complex problems into elegant code.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 lg:gap-6 pt-2">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 lg:gap-6 pt-1">
             <a href="#projects" className="group relative text-xs sm:text-sm lg:text-base px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-[#491717] text-white/80 font-bold tracking-widest uppercase rounded-sm transition-all hover:bg-[#632020] hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(73,23,23,0.3)] hover:shadow-[0_0_30px_rgba(73,23,23,0.6)] overflow-hidden">
               <span className="relative z-10 flex items-center gap-2 sm:gap-3 font-cyber">
                 View Projects
@@ -224,8 +240,8 @@ export default function Banner() {
             </a>
           </div>
 
-          {/* SOCIAL LINKS */}
-          <div className="flex justify-center lg:justify-start gap-5 sm:gap-6 pt-2">
+          {/* SOCIAL LINKS — mobile/tablet only */}
+          <div className="flex lg:hidden justify-center gap-5 sm:gap-6 pt-2">
             {socialLinks.map((social, i) => (
               <a
                 key={i}
@@ -245,16 +261,33 @@ export default function Banner() {
           </div>
         </div>
 
-        {/* --- RIGHT: HOLOGRAM IMAGE --- */}
-        {/* FIX 2 & 3: Removed rounded-full (no more circle), changed object position to show full head,
-            replaced hard crop with multi-directional gradient blend into black background */}
-        <div className="lg:col-span-5 relative order-1 lg:order-2 h-[55vh] sm:h-[65vh] lg:h-[90vh] w-full flex items-end justify-center lg:justify-end overflow-visible pointer-events-none">
+        {/* --- RIGHT: HOLOGRAM IMAGE + VERTICAL SOCIAL ICONS --- */}
+<div className="lg:col-span-5 relative order-1 lg:order-2 h-[55vh] sm:h-[65vh] lg:h-[90vh] w-full flex items-end justify-center lg:justify-end overflow-visible pointer-events-none lg:-translate-y-16">
+
+          {/* VERTICAL SOCIAL ICONS — desktop only */}
+<div className="social-line hidden lg:flex flex-col items-center gap-5 absolute -right-5 top-[18%] z-40 pointer-events-auto">
+            {socialLinks.map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative p-2"
+                title={social.label}
+              >
+                <div className="absolute inset-0 bg-[#491717] rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
+                <social.icon
+                  className="relative text-gray-400 group-hover:text-[#b45555] transition-colors duration-300 z-10"
+                  size={20}
+                />
+              </a>
+            ))}
+          </div>
+
           <div className="relative w-full h-full lg:w-[120%] lg:-mr-24 hologram-wrapper">
-            {/* Glitch layers — no rounded-full so no visible circle edge */}
             <div className="glitch-layer cyan"></div>
             <div className="glitch-layer red"></div>
 
-            {/* Image container — no rounded-full, no overflow-hidden that clips the head */}
             <div className="relative w-full h-full">
               <Image
                 src="/assets/araf-headshot.jpeg"
@@ -267,15 +300,14 @@ export default function Banner() {
               <div className="absolute inset-0 bg-white opacity-[0.05] z-20 mix-blend-overlay pointer-events-none"></div>
             </div>
 
-            {/* FIX 3: Strong multi-directional gradient fade — blends all edges into black for premium look */}
             <div
               className="absolute inset-0 z-30 pointer-events-none"
               style={{
                 background: `
                   linear-gradient(to top,    black 0%, transparent 45%),
-                  linear-gradient(to bottom, black 0%, transparent 22%),
-                  linear-gradient(to right,  black 0%, transparent 25%),
-                  linear-gradient(to left,   black 0%, transparent 25%)
+                  linear-gradient(to bottom, black 0%, transparent 2%),
+                  linear-gradient(to right,  black 0%, transparent 2%),
+                  linear-gradient(to left,   black 0%, transparent 2%)
                 `,
               }}
             />
